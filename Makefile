@@ -1,4 +1,4 @@
 .PHONY: docker
 
 dagster:
-	dagster dev --module-name discursus_data_platform
+	dagster-webserver --module-name social_analytics_mvp

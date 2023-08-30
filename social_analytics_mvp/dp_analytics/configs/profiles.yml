@@ -1,7 +1,0 @@
-social_analytics_mvp:
-  target: dev
-  outputs:
-    dev:
-      type: duckdb
-      path: './social_analytics_mvp.db'
-      schema: analytics
