@@ -11,7 +11,7 @@ with base as (
         "Traffic" as traffic,
         "Popularity Estimate" as popularity_estimate
 
-    from analytics_sources.media_sources
+    from {{ ref('media_sources') }}
 
 )
 

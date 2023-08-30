@@ -9,6 +9,9 @@ readme = "README.md"
 python = "^3.9"
 dbt-core = "^1.6.1"
 dbt-duckdb = "^1.6.0"
+dagster = "^1.4.10"
+dagster-dbt = "^0.20.10"
+dagster-webserver = "^1.4.10"
 
 
 [build-system]

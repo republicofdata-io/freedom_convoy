@@ -10,7 +10,7 @@ with base as (
         article_date,
         partition_ts as gdelt_partition_ts
         
-    from analytics_sources.gdelt_articles
+    from {{ ref('gdelt_articles') }}
 
 )
 

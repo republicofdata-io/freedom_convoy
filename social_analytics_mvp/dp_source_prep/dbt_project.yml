@@ -1,11 +1,11 @@
-name: 'social_analytics_mvp'
+name: 'mvp_source_prep'
 version: '0.1.0'
 config-version: 2
 
-profile: 'social_analytics_mvp'
+profile: 'mvp_source_prep'
 
 model-paths: ["models"]
-seed-paths: ["sources"]
+seed-paths: ["data"]
 macro-paths: ["macros"]
 
 clean-targets:
@@ -13,14 +13,14 @@ clean-targets:
   - "dbt_packages"
 
 seeds:
-  social_analytics_mvp:
+  mvp_source_prep:
     +schema: sources
     gdelt_articles:
       +column_types:
         article_date: varchar
 
 models:
-  social_analytics_mvp:
+  mvp_source_prep:
     +materialized: table
     staging:
       +schema: staging
