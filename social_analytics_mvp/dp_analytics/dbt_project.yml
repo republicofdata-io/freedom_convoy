@@ -5,7 +5,7 @@ config-version: 2
 profile: 'social_analytics_mvp'
 
 model-paths: ["models"]
-seed-paths: ["sources"]
+seed-paths: ["data"]
 macro-paths: ["macros"]
 
 clean-targets:
