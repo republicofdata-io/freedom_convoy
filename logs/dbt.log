@@ -1,0 +1,170 @@
+[0m08:02:43.172493 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1041a69a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106ec7bb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106ef2610>]}
+
+
+============================== 08:02:43.176830 | 039ff7e5-8fae-4401-8ba6-910c8f8abc09 ==============================
+[0m08:02:43.176830 [info ] [MainThread]: Running with dbt=1.6.1
+[0m08:02:43.177252 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'profiles_dir': '/Users/olivierdupuis/git/discursus/mvp', 'log_path': '/Users/olivierdupuis/git/discursus/mvp/logs', 'fail_fast': 'False', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'invocation_command': 'dbt seed', 'log_format': 'default', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m08:02:43.250260 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '039ff7e5-8fae-4401-8ba6-910c8f8abc09', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106ec7130>]}
+[0m08:02:43.255968 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '039ff7e5-8fae-4401-8ba6-910c8f8abc09', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106fce640>]}
+[0m08:02:43.257441 [info ] [MainThread]: Registered adapter: duckdb=1.6.0
+[0m08:02:43.268494 [debug] [MainThread]: checksum: efe19d9f5b93d1a98cc804fbfcdb6b3aced98b974af664946fee1cde8837deb7, vars: {}, profile: , target: , version: 1.6.1
+[0m08:02:43.301875 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 1 files added, 0 files changed.
+[0m08:02:43.302240 [debug] [MainThread]: Partial parsing: added file: discursus_mvp://data/media_sources.csv
+[0m08:02:43.320321 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.discursus_mvp
+[0m08:02:43.323575 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '039ff7e5-8fae-4401-8ba6-910c8f8abc09', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1071c30d0>]}
+[0m08:02:43.330093 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '039ff7e5-8fae-4401-8ba6-910c8f8abc09', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10708ef10>]}
+[0m08:02:43.330397 [info ] [MainThread]: Found 2 seeds, 0 sources, 0 exposures, 0 metrics, 348 macros, 0 groups, 0 semantic models
+[0m08:02:43.330625 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '039ff7e5-8fae-4401-8ba6-910c8f8abc09', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10708ed00>]}
+[0m08:02:43.331569 [info ] [MainThread]: 
+[0m08:02:43.332000 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m08:02:43.332616 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_discursus_mvp'
+[0m08:02:43.339557 [debug] [ThreadPool]: Using duckdb connection "list_discursus_mvp"
+[0m08:02:43.339752 [debug] [ThreadPool]: On list_discursus_mvp: /* {"app": "dbt", "dbt_version": "1.6.1", "profile_name": "discursus_mvp", "target_name": "dev", "connection_name": "list_discursus_mvp"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where catalog_name = '"discursus_mvp"'
+    
+  
+  
+[0m08:02:43.339899 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m08:02:43.353438 [debug] [ThreadPool]: SQL status: OK in 0.0 seconds
+[0m08:02:43.355633 [debug] [ThreadPool]: On list_discursus_mvp: Close
+[0m08:02:43.357093 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_discursus_mvp, now create_discursus_mvp_analytics_sources)
+[0m08:02:43.357445 [debug] [ThreadPool]: Creating schema "database: "discursus_mvp"
+schema: "analytics_sources"
+"
+[0m08:02:43.360079 [debug] [ThreadPool]: Using duckdb connection "create_discursus_mvp_analytics_sources"
+[0m08:02:43.360240 [debug] [ThreadPool]: On create_discursus_mvp_analytics_sources: BEGIN
+[0m08:02:43.360370 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m08:02:43.362487 [debug] [ThreadPool]: SQL status: OK in 0.0 seconds
+[0m08:02:43.362660 [debug] [ThreadPool]: Using duckdb connection "create_discursus_mvp_analytics_sources"
+[0m08:02:43.362799 [debug] [ThreadPool]: On create_discursus_mvp_analytics_sources: /* {"app": "dbt", "dbt_version": "1.6.1", "profile_name": "discursus_mvp", "target_name": "dev", "connection_name": "create_discursus_mvp_analytics_sources"} */
+create schema if not exists "discursus_mvp"."analytics_sources"
+[0m08:02:43.363656 [debug] [ThreadPool]: SQL status: OK in 0.0 seconds
+[0m08:02:43.364123 [debug] [ThreadPool]: On create_discursus_mvp_analytics_sources: COMMIT
+[0m08:02:43.364272 [debug] [ThreadPool]: Using duckdb connection "create_discursus_mvp_analytics_sources"
+[0m08:02:43.364406 [debug] [ThreadPool]: On create_discursus_mvp_analytics_sources: COMMIT
+[0m08:02:43.364557 [debug] [ThreadPool]: SQL status: OK in 0.0 seconds
+[0m08:02:43.364686 [debug] [ThreadPool]: On create_discursus_mvp_analytics_sources: Close
+[0m08:02:43.366095 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_discursus_mvp_analytics_sources, now list_discursus_mvp_analytics_sources)
+[0m08:02:43.369148 [debug] [ThreadPool]: Using duckdb connection "list_discursus_mvp_analytics_sources"
+[0m08:02:43.369309 [debug] [ThreadPool]: On list_discursus_mvp_analytics_sources: BEGIN
+[0m08:02:43.369460 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m08:02:43.371513 [debug] [ThreadPool]: SQL status: OK in 0.0 seconds
+[0m08:02:43.371670 [debug] [ThreadPool]: Using duckdb connection "list_discursus_mvp_analytics_sources"
+[0m08:02:43.371815 [debug] [ThreadPool]: On list_discursus_mvp_analytics_sources: /* {"app": "dbt", "dbt_version": "1.6.1", "profile_name": "discursus_mvp", "target_name": "dev", "connection_name": "list_discursus_mvp_analytics_sources"} */
+select
+      'discursus_mvp' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where table_schema = 'analytics_sources'
+    and table_catalog = 'discursus_mvp'
+  
+[0m08:02:43.380885 [debug] [ThreadPool]: SQL status: OK in 0.0 seconds
+[0m08:02:43.382022 [debug] [ThreadPool]: On list_discursus_mvp_analytics_sources: ROLLBACK
+[0m08:02:43.382682 [debug] [ThreadPool]: Failed to rollback 'list_discursus_mvp_analytics_sources'
+[0m08:02:43.382823 [debug] [ThreadPool]: On list_discursus_mvp_analytics_sources: Close
+[0m08:02:43.384332 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '039ff7e5-8fae-4401-8ba6-910c8f8abc09', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106fce7f0>]}
+[0m08:02:43.384553 [debug] [MainThread]: Using duckdb connection "master"
+[0m08:02:43.384682 [debug] [MainThread]: On master: BEGIN
+[0m08:02:43.384801 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m08:02:43.386805 [debug] [MainThread]: SQL status: OK in 0.0 seconds
+[0m08:02:43.386966 [debug] [MainThread]: On master: COMMIT
+[0m08:02:43.387096 [debug] [MainThread]: Using duckdb connection "master"
+[0m08:02:43.387220 [debug] [MainThread]: On master: COMMIT
+[0m08:02:43.387365 [debug] [MainThread]: SQL status: OK in 0.0 seconds
+[0m08:02:43.387489 [debug] [MainThread]: On master: Close
+[0m08:02:43.388254 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m08:02:43.388413 [info ] [MainThread]: 
+[0m08:02:43.389879 [debug] [Thread-1  ]: Began running node seed.discursus_mvp.gdelt_articles
+[0m08:02:43.390138 [info ] [Thread-1  ]: 1 of 2 START seed file analytics_sources.gdelt_articles ........................ [RUN]
+[0m08:02:43.390491 [debug] [Thread-1  ]: Re-using an available connection from the pool (formerly list_discursus_mvp_analytics_sources, now seed.discursus_mvp.gdelt_articles)
+[0m08:02:43.390673 [debug] [Thread-1  ]: Began compiling node seed.discursus_mvp.gdelt_articles
+[0m08:02:43.390906 [debug] [Thread-1  ]: Timing info for seed.discursus_mvp.gdelt_articles (compile): 08:02:43.390796 => 08:02:43.390797
+[0m08:02:43.391067 [debug] [Thread-1  ]: Began executing node seed.discursus_mvp.gdelt_articles
+[0m08:02:43.820468 [debug] [Thread-1  ]: Using duckdb connection "seed.discursus_mvp.gdelt_articles"
+[0m08:02:43.820752 [debug] [Thread-1  ]: On seed.discursus_mvp.gdelt_articles: BEGIN
+[0m08:02:43.820918 [debug] [Thread-1  ]: Opening a new connection, currently in state closed
+[0m08:02:43.823504 [debug] [Thread-1  ]: SQL status: OK in 0.0 seconds
+[0m08:02:43.823715 [debug] [Thread-1  ]: Using duckdb connection "seed.discursus_mvp.gdelt_articles"
+[0m08:02:43.823889 [debug] [Thread-1  ]: On seed.discursus_mvp.gdelt_articles: /* {"app": "dbt", "dbt_version": "1.6.1", "profile_name": "discursus_mvp", "target_name": "dev", "node_id": "seed.discursus_mvp.gdelt_articles"} */
+truncate table "discursus_mvp"."analytics_sources"."gdelt_articles"
+[0m08:02:43.825973 [debug] [Thread-1  ]: SQL status: OK in 0.0 seconds
+[0m08:02:43.832476 [debug] [Thread-1  ]: Using duckdb connection "seed.discursus_mvp.gdelt_articles"
+[0m08:02:43.832672 [debug] [Thread-1  ]: On seed.discursus_mvp.gdelt_articles: 
+          COPY "discursus_mvp"."analytics_sources"."gdelt_articles" FROM '/Users/olivierdupuis/git/discursus/mvp/data/gdelt_articles.csv' (FORMAT CSV, HEADER TRUE)
+        ...
+[0m08:02:43.943890 [debug] [Thread-1  ]: SQL status: OK in 0.0 seconds
+[0m08:02:43.947797 [debug] [Thread-1  ]: Writing runtime SQL for node "seed.discursus_mvp.gdelt_articles"
+[0m08:02:43.957909 [debug] [Thread-1  ]: On seed.discursus_mvp.gdelt_articles: COMMIT
+[0m08:02:43.958165 [debug] [Thread-1  ]: Using duckdb connection "seed.discursus_mvp.gdelt_articles"
+[0m08:02:43.958337 [debug] [Thread-1  ]: On seed.discursus_mvp.gdelt_articles: COMMIT
+[0m08:02:44.034446 [debug] [Thread-1  ]: SQL status: OK in 0.0 seconds
+[0m08:02:44.035055 [debug] [Thread-1  ]: Timing info for seed.discursus_mvp.gdelt_articles (execute): 08:02:43.391186 => 08:02:44.034952
+[0m08:02:44.035249 [debug] [Thread-1  ]: On seed.discursus_mvp.gdelt_articles: Close
+[0m08:02:44.182619 [debug] [Thread-1  ]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '039ff7e5-8fae-4401-8ba6-910c8f8abc09', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106f63e50>]}
+[0m08:02:44.183020 [info ] [Thread-1  ]: 1 of 2 OK loaded seed file analytics_sources.gdelt_articles .................... [[32mINSERT 23719[0m in 0.79s]
+[0m08:02:44.183499 [debug] [Thread-1  ]: Finished running node seed.discursus_mvp.gdelt_articles
+[0m08:02:44.183808 [debug] [Thread-1  ]: Began running node seed.discursus_mvp.media_sources
+[0m08:02:44.184131 [info ] [Thread-1  ]: 2 of 2 START seed file analytics_sources.media_sources ......................... [RUN]
+[0m08:02:44.184581 [debug] [Thread-1  ]: Re-using an available connection from the pool (formerly seed.discursus_mvp.gdelt_articles, now seed.discursus_mvp.media_sources)
+[0m08:02:44.184777 [debug] [Thread-1  ]: Began compiling node seed.discursus_mvp.media_sources
+[0m08:02:44.184990 [debug] [Thread-1  ]: Timing info for seed.discursus_mvp.media_sources (compile): 08:02:44.184887 => 08:02:44.184889
+[0m08:02:44.185152 [debug] [Thread-1  ]: Began executing node seed.discursus_mvp.media_sources
+[0m08:02:44.191644 [debug] [Thread-1  ]: Using duckdb connection "seed.discursus_mvp.media_sources"
+[0m08:02:44.191854 [debug] [Thread-1  ]: On seed.discursus_mvp.media_sources: BEGIN
+[0m08:02:44.192016 [debug] [Thread-1  ]: Opening a new connection, currently in state closed
+[0m08:02:44.194616 [debug] [Thread-1  ]: SQL status: OK in 0.0 seconds
+[0m08:02:44.194839 [debug] [Thread-1  ]: Using duckdb connection "seed.discursus_mvp.media_sources"
+[0m08:02:44.195018 [debug] [Thread-1  ]: On seed.discursus_mvp.media_sources: /* {"app": "dbt", "dbt_version": "1.6.1", "profile_name": "discursus_mvp", "target_name": "dev", "node_id": "seed.discursus_mvp.media_sources"} */
+
+    create table "discursus_mvp"."analytics_sources"."media_sources" ("News Source" text,"domain" text,"Bias" text,"Reporting" text,"Country" text,"Credibility" text,"Media Type" text,"Traffic" text,"Popularity Estimate" integer)
+  
+[0m08:02:44.195269 [debug] [Thread-1  ]: SQL status: OK in 0.0 seconds
+[0m08:02:44.195982 [debug] [Thread-1  ]: Using duckdb connection "seed.discursus_mvp.media_sources"
+[0m08:02:44.196161 [debug] [Thread-1  ]: On seed.discursus_mvp.media_sources: 
+          COPY "discursus_mvp"."analytics_sources"."media_sources" FROM '/Users/olivierdupuis/git/discursus/mvp/data/media_sources.csv' (FORMAT CSV, HEADER TRUE)
+        ...
+[0m08:02:44.197591 [debug] [Thread-1  ]: SQL status: OK in 0.0 seconds
+[0m08:02:44.198017 [debug] [Thread-1  ]: Writing runtime SQL for node "seed.discursus_mvp.media_sources"
+[0m08:02:44.201331 [debug] [Thread-1  ]: On seed.discursus_mvp.media_sources: COMMIT
+[0m08:02:44.201550 [debug] [Thread-1  ]: Using duckdb connection "seed.discursus_mvp.media_sources"
+[0m08:02:44.201815 [debug] [Thread-1  ]: On seed.discursus_mvp.media_sources: COMMIT
+[0m08:02:44.202420 [debug] [Thread-1  ]: SQL status: OK in 0.0 seconds
+[0m08:02:44.203037 [debug] [Thread-1  ]: Timing info for seed.discursus_mvp.media_sources (execute): 08:02:44.185267 => 08:02:44.202935
+[0m08:02:44.203244 [debug] [Thread-1  ]: On seed.discursus_mvp.media_sources: Close
+[0m08:02:44.209836 [debug] [Thread-1  ]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '039ff7e5-8fae-4401-8ba6-910c8f8abc09', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1071995e0>]}
+[0m08:02:44.210191 [info ] [Thread-1  ]: 2 of 2 OK loaded seed file analytics_sources.media_sources ..................... [[32mINSERT 29[0m in 0.03s]
+[0m08:02:44.210508 [debug] [Thread-1  ]: Finished running node seed.discursus_mvp.media_sources
+[0m08:02:44.211240 [debug] [MainThread]: Using duckdb connection "master"
+[0m08:02:44.211410 [debug] [MainThread]: On master: BEGIN
+[0m08:02:44.211539 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m08:02:44.214074 [debug] [MainThread]: SQL status: OK in 0.0 seconds
+[0m08:02:44.214286 [debug] [MainThread]: On master: COMMIT
+[0m08:02:44.214427 [debug] [MainThread]: Using duckdb connection "master"
+[0m08:02:44.214558 [debug] [MainThread]: On master: COMMIT
+[0m08:02:44.214704 [debug] [MainThread]: SQL status: OK in 0.0 seconds
+[0m08:02:44.214846 [debug] [MainThread]: On master: Close
+[0m08:02:44.215645 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m08:02:44.215791 [debug] [MainThread]: Connection 'seed.discursus_mvp.media_sources' was properly closed.
+[0m08:02:44.215952 [info ] [MainThread]: 
+[0m08:02:44.216113 [info ] [MainThread]: Finished running 2 seeds in 0 hours 0 minutes and 0.88 seconds (0.88s).
+[0m08:02:44.216526 [debug] [MainThread]: Command end result
+[0m08:02:44.222386 [info ] [MainThread]: 
+[0m08:02:44.222641 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m08:02:44.222787 [info ] [MainThread]: 
+[0m08:02:44.222942 [info ] [MainThread]: Done. PASS=2 WARN=0 ERROR=0 SKIP=0 TOTAL=2
+[0m08:02:44.223233 [debug] [MainThread]: Command `dbt seed` succeeded at 08:02:44.223185 after 1.07 seconds
+[0m08:02:44.223412 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1041a69a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1071124c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107112b80>]}
+[0m08:02:44.223601 [debug] [MainThread]: Flushing usage events
