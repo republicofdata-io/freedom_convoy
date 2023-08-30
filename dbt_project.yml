@@ -1,0 +1,24 @@
+name: 'social_analytics_mvp'
+version: '0.1.0'
+config-version: 2
+
+profile: 'social_analytics_mvp'
+
+model-paths: ["models"]
+seed-paths: ["data"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  social_analytics_mvp:
+    +schema: sources
+    gdelt_articles:
+      +column_types:
+        article_date: varchar
+
+models:
+  social_analytics_mvp:
+    +materialized: table
