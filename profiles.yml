@@ -1,7 +1,7 @@
-discursus_mvp:
+social_analytics_mvp:
   target: dev
   outputs:
     dev:
       type: duckdb
-      path: './discursus_mvp.db'
+      path: './social_analytics_mvp.db'
       schema: analytics

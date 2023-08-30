@@ -1,8 +1,8 @@
-name: 'discursus_mvp'
+name: 'social_analytics_mvp'
 version: '0.1.0'
 config-version: 2
 
-profile: 'discursus_mvp'
+profile: 'social_analytics_mvp'
 
 model-paths: ["models"]
 seed-paths: ["data"]
@@ -13,12 +13,12 @@ clean-targets:
   - "dbt_packages"
 
 seeds:
-  discursus_mvp:
+  social_analytics_mvp:
     +schema: sources
     gdelt_articles:
       +column_types:
         article_date: varchar
 
 models:
-  discursus_mvp:
+  social_analytics_mvp:
     +materialized: table
