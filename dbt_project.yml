@@ -5,7 +5,7 @@ config-version: 2
 profile: 'social_analytics_mvp'
 
 model-paths: ["models"]
-seed-paths: ["data"]
+seed-paths: ["sources"]
 macro-paths: ["macros"]
 
 clean-targets:
@@ -22,3 +22,7 @@ seeds:
 models:
   social_analytics_mvp:
     +materialized: table
+    staging:
+      +schema: staging
+    integration:
+      +schema: integration
