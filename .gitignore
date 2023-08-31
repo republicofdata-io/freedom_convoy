@@ -5,6 +5,8 @@
 .DS_Store
 .vscode
 .idea
+.dagster
+
 target
 datagrip
 logs

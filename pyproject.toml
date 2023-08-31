@@ -12,6 +12,12 @@ dbt-duckdb = "^1.6.0"
 dagster = "^1.4.10"
 dagster-dbt = "^0.20.10"
 dagster-webserver = "^1.4.10"
+bs4 = "^0.0.1"
+pandas = "2.0.3"
+dagster-duckdb = "^0.20.10"
+dagster-duckdb-pandas = "^0.20.10"
+dagster-aws = "^0.20.10"
+pyarrow = "^13.0.0"
 
 
 [build-system]
