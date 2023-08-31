@@ -1,7 +1,7 @@
-mvp_source_prep:
+mvp_source_data:
   target: dev
   outputs:
     dev:
       type: duckdb
       path: '../social_analytics_mvp.db'
-      schema: source_prep
+      schema: source_data

@@ -1,8 +1,8 @@
-name: 'mvp_source_prep'
+name: 'mvp_source_data'
 version: '0.1.0'
 config-version: 2
 
-profile: 'mvp_source_prep'
+profile: 'mvp_source_data'
 
 model-paths: ["models"]
 seed-paths: ["data"]
@@ -13,14 +13,14 @@ clean-targets:
   - "dbt_packages"
 
 seeds:
-  mvp_source_prep:
+  mvp_source_data:
     +schema: sources
     gdelt_articles:
       +column_types:
         article_date: varchar
 
 models:
-  mvp_source_prep:
+  mvp_source_data:
     +materialized: table
     staging:
       +schema: staging
