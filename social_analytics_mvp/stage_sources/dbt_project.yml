@@ -1,0 +1,16 @@
+name: 'mvp_stage_sources'
+version: '0.1.0'
+config-version: 2
+
+profile: 'mvp_stage_sources'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  mvp_stage_sources:
+    +materialized: table
