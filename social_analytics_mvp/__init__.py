@@ -6,7 +6,7 @@ from dagster import (
 )
 from dagster_dbt import dbt_cli_resource, load_assets_from_dbt_project
 from dagster_duckdb_pandas import DuckDBPandasIOManager
-from dagster_aws.s3 import S3Resource
+from dagster_aws.s3 import s3_pickle_io_manager, S3Resource
 
 from social_analytics_mvp import (
     s3_sources,
@@ -30,6 +30,9 @@ my_assets = with_resources(
     ) + 
     load_assets_from_package_module(enhance_articles),
     resource_defs = {
+        "io_manager": s3_pickle_io_manager.configured(
+            {"s3_bucket": "social-analytics-mvp", "s3_prefix": "platform"}
+        ),
         "dbt": dbt_cli_resource.configured(
             {
                 "project_dir": stage_sources_project_dir,
