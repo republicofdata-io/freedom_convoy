@@ -38,39 +38,32 @@ def articles_prep(context, int__articles__filter_medias):
     articles_df = articles_df.drop_duplicates(subset=["article_url"], keep='first')
 
     # Create dataframe
-    # column_names = ['article_url', 'file_name', 'title', 'description', 'keywords', 'content']
-    # articles_enhanced_df = pd.DataFrame(columns = column_names)
+    column_names = ['article_url', 'file_name', 'title', 'description', 'keywords', 'content']
+    articles_enhanced_df = pd.DataFrame(columns = column_names)
 
-    # for _, row in df_articles.iterrows():
-    #     try:
-    #         scraped_article = context.resources.web_scraper_resource.scrape_article(row["article_url"])
-    #     except IndexError:
-    #         break
-    #     except ConnectionResetError:
-    #         break
+    for _, row in articles_df.iterrows():
+        try:
+            scraped_article = context.resources.web_scraper_resource.scrape_article(row["article_url"])
+        except IndexError:
+            break
+        except ConnectionResetError:
+            break
 
-    #     if scraped_article is None:
-    #         continue
+        if scraped_article is None:
+            continue
     
-    #     # Use get method with default value (empty string) for each element in scraped_row
-    #     scraped_row = [
-    #         scraped_article.get('url', ''),
-    #         scraped_article.get('filename', ''),
-    #         scraped_article.get('title', ''),
-    #         scraped_article.get('description', ''),
-    #         scraped_article.get('keywords', ''),
-    #         scraped_article.get('content', '')
-    #     ]
+        # Use get method with default value (empty string) for each element in scraped_row
+        scraped_row = [
+            scraped_article.get('url', ''),
+            scraped_article.get('filename', ''),
+            scraped_article.get('title', ''),
+            scraped_article.get('description', ''),
+            scraped_article.get('keywords', ''),
+            scraped_article.get('content', '')
+        ]
         
-    #     df_length = len(articles_enhanced_df)
-    #     articles_enhanced_df.loc[df_length] = scraped_row # type: ignore
-    
-    # # Remove rows with little or no content
-    # articles_enhanced_df = articles_enhanced_df[articles_enhanced_df['content'].str.len() > 1000]
-
-    # # Deduplicate syndicated articles
-    # articles_enhanced_df['title_hash'] = articles_enhanced_df['title'].apply(compute_hash)
-    # articles_enhanced_df = articles_enhanced_df.drop_duplicates(subset='title_hash')
+        df_length = len(articles_enhanced_df)
+        articles_enhanced_df.loc[df_length] = scraped_row
 
     # Return asset
     return Output(
