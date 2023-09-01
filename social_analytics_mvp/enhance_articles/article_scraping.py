@@ -1,6 +1,7 @@
 from dagster import (
     asset,
     AssetIn,
+    DailyPartitionsDefinition,
     Output
 )
 
@@ -22,15 +23,19 @@ def compute_hash(text):
     resource_defs = {
         'web_scraper_resource': my_resources.my_web_scraper_resource
     },
-    # partitions_def=article_partitions_def,
+    partitions_def=DailyPartitionsDefinition(
+        start_date='2022-01-15',
+        end_date='2022-02-28'
+    ),
     compute_kind="python",
 )
 def articles_prep(context, int__articles__filter_medias):
     # Get partition
-    # dagster_partition_id = context.partition_key
+    partition_date_str = context.asset_partition_key_for_output()
 
-    # Dedup articles based on article_url field
-    articles_df = int__articles__filter_medias.drop_duplicates(subset=["article_url"], keep='first')
+    # Keep partition's articles and dedup articles
+    articles_df = int__articles__filter_medias[int__articles__filter_medias['article_ts'].dt.date == pd.Timestamp(partition_date_str).date()]
+    articles_df = articles_df.drop_duplicates(subset=["article_url"], keep='first')
 
     # Create dataframe
     # column_names = ['article_url', 'file_name', 'title', 'description', 'keywords', 'content']
