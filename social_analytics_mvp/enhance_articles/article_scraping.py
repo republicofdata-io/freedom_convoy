@@ -28,7 +28,7 @@ social_analytics_mvp_db = file_relative_path(__file__, "./../social_analytics_mv
     ),
     compute_kind="python",
 )
-def articles_prep(context, int__articles__filter_medias):
+def article_scraped_data(context, int__articles__filter_medias):
     # Get partition
     partition_date_str = context.asset_partition_key_for_output()
 
@@ -114,3 +114,20 @@ def articles_prep(context, int__articles__filter_medias):
             "rows": articles_df.index.size
         }
     )
+
+
+@asset(
+    ins = {"article_scraped_data": AssetIn(key_prefix="enhance_articles")},
+    description = "Use LLM to filter and extract additional info",
+    key_prefix = ["enhance_articles"],
+    partitions_def=DailyPartitionsDefinition(
+        start_date='2022-01-15',
+        end_date='2022-02-28'
+    ),
+    compute_kind="LangChain",
+)
+def article_llm_enhancements(context, article_scraped_data):
+    # Get partition
+    partition_date_str = context.asset_partition_key_for_output()
+
+    return None
