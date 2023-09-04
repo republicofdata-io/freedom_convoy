@@ -7,7 +7,7 @@ with base as (
         locations,
         persons,
         organizations,
-        article_date,
+        strptime(article_date, '%Y%m%d%H%M%S') as article_ts,
         partition_ts as gdelt_partition_ts
         
     from {{ source('s3_sources', 'gdelt_articles') }}

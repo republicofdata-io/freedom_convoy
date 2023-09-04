@@ -1,0 +1,4 @@
+sources:
+  - name: enhanced_articles
+    tables:
+      - name: articles
