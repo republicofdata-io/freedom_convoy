@@ -18,6 +18,8 @@ dagster-duckdb = "^0.20.10"
 dagster-duckdb-pandas = "^0.20.10"
 dagster-aws = "^0.20.10"
 pyarrow = "^13.0.0"
+langchain = "0.0.281"
+openai = "0.28.0"
 
 
 [build-system]

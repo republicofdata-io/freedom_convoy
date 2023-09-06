@@ -6,6 +6,7 @@
 .vscode
 .idea
 .dagster
+.env
 
 target
 datagrip
