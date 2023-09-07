@@ -14,6 +14,7 @@ from langchain.chains import (
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 import pandas as pd
+import time
 
 from social_analytics_mvp.utils.resources import my_resources
 
@@ -189,6 +190,8 @@ def article_llm_enhancements(context, article_scraped_data):
 
         df_length = len(article_llm_enhancements_df)
         article_llm_enhancements_df.loc[df_length] = [row['article_url'], overall_completion_str['summary'], overall_completion_str['relevancy']]
+
+        time.sleep(5)
 
     # Write df to duckdb
     connection = duckdb.connect(database=social_analytics_mvp_db)
