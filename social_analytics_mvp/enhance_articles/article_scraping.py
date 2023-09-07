@@ -7,12 +7,12 @@ from dagster import (
 )
 
 import duckdb
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate,
+from langchain.chains import (
+    LLMChain,
+    SequentialChain
 )
-from langchain.chains import LLMChain
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts import PromptTemplate
 import pandas as pd
 
 from social_analytics_mvp.utils.resources import my_resources
@@ -115,9 +115,9 @@ def article_scraped_data(context, int__articles__filter_medias):
 
     # Return asset
     return Output(
-        value = articles_df, 
+        value = articles_enhanced_df, 
         metadata = {
-            "rows": articles_df.index.size
+            "rows": articles_enhanced_df.index.size
         }
     )
 
@@ -126,9 +126,6 @@ def article_scraped_data(context, int__articles__filter_medias):
     ins = {"article_scraped_data": AssetIn(key_prefix="enhance_articles")},
     description = "Use LLM to filter and extract additional info",
     key_prefix = ["enhance_articles"],
-    resource_defs = {
-        'openai_resource': my_resources.my_openai_resource
-    },
     partitions_def=DailyPartitionsDefinition(
         start_date='2022-01-15',
         end_date='2022-02-28'
@@ -139,29 +136,59 @@ def article_llm_enhancements(context, article_scraped_data):
     # Get partition
     partition_date_str = context.asset_partition_key_for_output()
 
-    # Cycle through each article in gdelt_mentions_enhanced and generate a summary
-    article_llm_enhancements_df = pd.DataFrame(columns = ['article_url', 'summary'])
+    # Cycle through each article and enhance
+    article_llm_enhancements_df = pd.DataFrame(columns = ['article_url', 'summary', 'relevancy'])
     for _, row in article_scraped_data.iterrows():
-        system_template = f"""You are a helpful assistant who generates concise summaries based on article's title, description and content."""
-        system_message_prompt = SystemMessagePromptTemplate.from_template(system_template)
-        human_template = f"""        
-        Title: {article_title}
-        Description: {article_description}
-        Content: {article_content}
+        # LLM chain to get a summary of the article
+        summary_template = f"""You are a helpful assistant who generates concise summaries based on article's title, description and content.
+        #####
+        Title: {row['title'][:100]}
+        Description: {row['description'][:500]}
+        Content: {row['content'][:1500]}
         """
-        human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
+        summary_prompt_template = PromptTemplate(input_variables=[], template=summary_template)
 
-        chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
-        chat_prompt.format_messages(article_title={row['title']}, article_description={row['description']}, article_content={row['content']})
-
-        chain = LLMChain(
-            llm=context.resources.openai_resource,
-            prompt=chat_prompt
+        summary_chain = LLMChain(
+            llm=ChatOpenAI(
+                model_name="gpt-3.5-turbo",
+                max_tokens=1500,
+                temperature=1
+            ),
+            prompt=summary_prompt_template,
+            output_key="summary"
         )
-        completion_str = chain.run()
+
+        # LLM chain to get assess relevancy of the article
+        relevancy_template = """Given this overview of the Canada Convoy Protest: 
+        'A series of protests and blockades in Canada against COVID-19 vaccine mandates and restrictions, called the Freedom Convoy (French: Convoi de la liberté) by organizers, began in early 2022. The initial convoy movement was created to protest vaccine mandates for crossing the United States border, but later evolved into a protest about COVID-19 mandates in general. Beginning January 22, hundreds of vehicles formed convoys from several points and traversed Canadian provinces before converging on Ottawa on January 29, 2022, with a rally at Parliament Hill. The convoys were joined by thousands of pedestrian protesters. Several offshoot protests blockaded provincial capitals and border crossings with the United States.'
+        Can you tell me if the following article covers that event? Answer by either 'True' or 'False'.
+        #####
+        Article summary: {summary}
+        """
+        relevancy_prompt_template = PromptTemplate(input_variables=["summary"], template=relevancy_template)
+
+        relevancy_chain = LLMChain(
+            llm=ChatOpenAI(
+                model_name="gpt-3.5-turbo",
+                max_tokens=1500,
+                temperature=1
+            ),
+            prompt=relevancy_prompt_template,
+            output_key="relevancy"
+        )
+
+        # Put together the overall chain and run
+        overall_chain = SequentialChain(
+            chains=[summary_chain, relevancy_chain],
+            input_variables=[],
+            output_variables=["summary", "relevancy"],
+            verbose=True)
+        
+
+        overall_completion_str = overall_chain({})
 
         df_length = len(article_llm_enhancements_df)
-        article_llm_enhancements_df.loc[df_length] = [row['article_url'], completion_str]
+        article_llm_enhancements_df.loc[df_length] = [row['article_url'], overall_completion_str['summary'], overall_completion_str['relevancy']]
 
     # Write df to duckdb
     connection = duckdb.connect(database=social_analytics_mvp_db)
@@ -184,7 +211,8 @@ def article_llm_enhancements(context, article_scraped_data):
             update enhanced_articles.article_llm_enhancements
             set 
                 article_url = temp_article_llm_enhancements.article_url,
-                summary = temp_article_llm_enhancements.summary
+                summary = temp_article_llm_enhancements.summary,
+                relevancy = temp_article_llm_enhancements.relevancy
             from temp_articles
             where enhanced_articles.article_llm_enhancements.article_url = temp_article_llm_enhancements.article_url
             """
