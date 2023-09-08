@@ -13,6 +13,7 @@ from langchain.chains import (
 )
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
+from openai.error import RateLimitError
 import pandas as pd
 import time
 
@@ -20,6 +21,15 @@ from social_analytics_mvp.utils.resources import my_resources
 
 
 social_analytics_mvp_db = file_relative_path(__file__, "./../social_analytics_mvp.db")
+
+def retry_llm_execution(llm_chain, max_retries=3, delay=5):
+    """Attempt to execute the LLM chain and retry on rate limit errors."""
+    for _ in range(max_retries):
+        try:
+            return llm_chain({})
+        except RateLimitError:
+            time.sleep(delay)
+    raise RateLimitError("Max retries hit, still facing RateLimitError.")
 
 
 @asset(
@@ -31,7 +41,7 @@ social_analytics_mvp_db = file_relative_path(__file__, "./../social_analytics_mv
     },
     partitions_def=DailyPartitionsDefinition(
         start_date='2022-01-15',
-        end_date='2022-02-28'
+        end_date='2022-03-01'
     ),
     compute_kind="python",
 )
@@ -129,7 +139,7 @@ def article_scraped_data(context, int__articles__filter_medias):
     key_prefix = ["enhance_articles"],
     partitions_def=DailyPartitionsDefinition(
         start_date='2022-01-15',
-        end_date='2022-02-28'
+        end_date='2022-03-01'
     ),
     compute_kind="LangChain",
 )
@@ -153,7 +163,7 @@ def article_llm_enhancements(context, article_scraped_data):
             llm=ChatOpenAI(
                 model_name="gpt-3.5-turbo",
                 max_tokens=1500,
-                temperature=1
+                temperature=0
             ),
             prompt=summary_prompt_template,
             output_key="summary"
@@ -162,7 +172,7 @@ def article_llm_enhancements(context, article_scraped_data):
         # LLM chain to get assess relevancy of the article
         relevancy_template = """Given this overview of the Canada Convoy Protest: 
         'A series of protests and blockades in Canada against COVID-19 vaccine mandates and restrictions, called the Freedom Convoy (French: Convoi de la liberté) by organizers, began in early 2022. The initial convoy movement was created to protest vaccine mandates for crossing the United States border, but later evolved into a protest about COVID-19 mandates in general. Beginning January 22, hundreds of vehicles formed convoys from several points and traversed Canadian provinces before converging on Ottawa on January 29, 2022, with a rally at Parliament Hill. The convoys were joined by thousands of pedestrian protesters. Several offshoot protests blockaded provincial capitals and border crossings with the United States.'
-        Can you tell me if the following article covers that event? Answer by either 'True' or 'False'.
+        Can you tell me if the following article talks about those protests, either the event itself, the actors, the aftermaths, etc. Answer stricly by either 'True' or 'False'.
         #####
         Article summary: {summary}
         """
@@ -172,7 +182,7 @@ def article_llm_enhancements(context, article_scraped_data):
             llm=ChatOpenAI(
                 model_name="gpt-3.5-turbo",
                 max_tokens=1500,
-                temperature=1
+                temperature=0
             ),
             prompt=relevancy_prompt_template,
             output_key="relevancy"
@@ -185,8 +195,7 @@ def article_llm_enhancements(context, article_scraped_data):
             output_variables=["summary", "relevancy"],
             verbose=True)
         
-
-        overall_completion_str = overall_chain({})
+        overall_completion_str = retry_llm_execution(overall_chain)
 
         df_length = len(article_llm_enhancements_df)
         article_llm_enhancements_df.loc[df_length] = [row['article_url'], overall_completion_str['summary'], overall_completion_str['relevancy']]
@@ -216,7 +225,7 @@ def article_llm_enhancements(context, article_scraped_data):
                 article_url = temp_article_llm_enhancements.article_url,
                 summary = temp_article_llm_enhancements.summary,
                 relevancy = temp_article_llm_enhancements.relevancy
-            from temp_articles
+            from temp_article_llm_enhancements
             where enhanced_articles.article_llm_enhancements.article_url = temp_article_llm_enhancements.article_url
             """
         )
