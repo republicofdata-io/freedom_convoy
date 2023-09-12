@@ -17,7 +17,7 @@ social_analytics_mvp_db = file_relative_path(__file__, "./../social_analytics_mv
 @asset(
     description="GDELT articles",
     key_prefix=["s3_sources"],
-    compute_kind="python",
+    compute_kind="duckdb",
 )
 def gdelt_articles(s3: S3Resource):
     # Download the file into a BytesIO object
@@ -46,7 +46,7 @@ def gdelt_articles(s3: S3Resource):
 @asset(
     description="Media sources",
     key_prefix=["s3_sources"],
-    compute_kind="python",
+    compute_kind="duckdb",
 )
 def media_sources(s3: S3Resource):
     # Download the file into a BytesIO object
