@@ -1,8 +1,8 @@
-name: 'mvp_stage_sources'
+name: 'discursus_stage_sources'
 version: '0.1.0'
 config-version: 2
 
-profile: 'mvp_stage_sources'
+profile: 'discursus_stage_sources'
 
 model-paths: ["models"]
 macro-paths: ["macros"]
@@ -12,5 +12,5 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  mvp_stage_sources:
+  discursus_stage_sources:
     +materialized: table
