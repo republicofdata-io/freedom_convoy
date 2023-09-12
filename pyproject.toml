@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mvp"
+name = "discursus"
 version = "0.1.0"
 description = ""
 authors = ["Olivier Dupuis <odupuis@lantrns.co>"]

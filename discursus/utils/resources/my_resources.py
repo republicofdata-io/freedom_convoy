@@ -1,4 +1,4 @@
-from social_analytics_mvp.utils.resources import web_scraper_resource
+from discursus.utils.resources import web_scraper_resource
 
 
 # Initiate resources
