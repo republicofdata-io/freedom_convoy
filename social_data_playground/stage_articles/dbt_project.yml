@@ -1,8 +1,8 @@
-name: 'discursus_stage_articles'
+name: 'social_data_playground_stage_articles'
 version: '0.1.0'
 config-version: 2
 
-profile: 'discursus_stage_articles'
+profile: 'social_data_playground_stage_articles'
 
 model-paths: ["models"]
 macro-paths: ["macros"]
@@ -12,5 +12,5 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  discursus_stage_articles:
+  social_data_playground_stage_articles:
     +materialized: table

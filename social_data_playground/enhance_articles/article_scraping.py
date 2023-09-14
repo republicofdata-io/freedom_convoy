@@ -17,10 +17,10 @@ from openai.error import RateLimitError
 import pandas as pd
 import time
 
-from discursus.utils.resources import my_resources
+from social_data_playground.utils.resources import my_resources
 
 
-discursus_db = file_relative_path(__file__, "./../discursus.db")
+social_data_playground_db = file_relative_path(__file__, "./../social_data_playground.db")
 
 def retry_llm_execution(llm_chain, max_retries=3, delay=5):
     """Attempt to execute the LLM chain and retry on rate limit errors."""
@@ -82,7 +82,7 @@ def article_scraped_data(context, int__articles__filter_medias):
         articles_enhanced_df.loc[df_length] = scraped_row
 
     # Write df to duckdb
-    connection = duckdb.connect(database=discursus_db)
+    connection = duckdb.connect(database=social_data_playground_db)
     connection.execute("create schema if not exists enhanced_articles")
 
     # Check if the table exists
@@ -203,7 +203,7 @@ def article_llm_enhancements(context, article_scraped_data):
         time.sleep(5)
 
     # Write df to duckdb
-    connection = duckdb.connect(database=discursus_db)
+    connection = duckdb.connect(database=social_data_playground_db)
     connection.execute("create schema if not exists enhanced_articles")
 
     # Check if the table exists

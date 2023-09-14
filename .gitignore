@@ -13,4 +13,4 @@ datagrip
 logs
 __pycache__
 .venv
-discursus.db
+social_data_playground.db

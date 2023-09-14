@@ -1,0 +1,7 @@
+social_data_playground_stage_sources:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../social_data_playground.db'
+      schema: stage_sources
