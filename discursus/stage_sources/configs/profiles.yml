@@ -1,7 +1,0 @@
-discursus_stage_sources:
-  target: dev
-  outputs:
-    dev:
-      type: duckdb
-      path: '../discursus.db'
-      schema: stage_sources

@@ -8,13 +8,13 @@ from dagster_dbt import dbt_cli_resource, load_assets_from_dbt_project
 from dagster_duckdb_pandas import DuckDBPandasIOManager
 from dagster_aws.s3 import s3_pickle_io_manager, S3Resource
 
-from discursus import (
+from social_data_playground import (
     s3_sources,
     enhance_articles
 )
 
 
-discursus_db = file_relative_path(__file__, "./discursus.db")
+social_data_playground_db = file_relative_path(__file__, "./social_data_playground.db")
 stage_sources_project_dir = file_relative_path(__file__, "./stage_sources/")
 stage_sources_profile_dir = file_relative_path(__file__, "./stage_sources/configs/")
 
@@ -31,7 +31,7 @@ my_assets = with_resources(
     load_assets_from_package_module(enhance_articles),
     resource_defs = {
         "io_manager": s3_pickle_io_manager.configured(
-            {"s3_bucket": "discursus", "s3_prefix": "platform"}
+            {"s3_bucket": "social-data-playground", "s3_prefix": "platform"}
         ),
         "dbt": dbt_cli_resource.configured(
             {
@@ -40,7 +40,7 @@ my_assets = with_resources(
             },
         ),
         "duckdb_io_manager": DuckDBPandasIOManager(
-            database=discursus_db
+            database=social_data_playground_db
         ),
         "s3": S3Resource(region_name='us-east-1')
     },

@@ -1,4 +1,4 @@
-from discursus.utils.resources import web_scraper_resource
+from social_data_playground.utils.resources import web_scraper_resource
 
 
 # Initiate resources
