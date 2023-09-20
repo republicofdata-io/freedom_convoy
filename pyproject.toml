@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "social_data_playground"
+name = "freedom_convoy_playground"
 version = "0.1.0"
 description = ""
 authors = ["Olivier Dupuis <odupuis@lantrns.co>"]
