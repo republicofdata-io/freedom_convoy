@@ -17,10 +17,10 @@ from openai.error import RateLimitError
 import pandas as pd
 import time
 
-from social_data_playground.utils.resources import my_resources
+from freedom_convoy_playground.utils.resources import my_resources
 
 
-social_data_playground_db = file_relative_path(__file__, "./../social_data_playground.db")
+freedom_convoy_playground_db = file_relative_path(__file__, "./../freedom_convoy_playground.db")
 
 def retry_llm_execution(llm_chain, max_retries=3, delay=5):
     """Attempt to execute the LLM chain and retry on rate limit errors."""
@@ -82,7 +82,7 @@ def article_scraped_data(context, int__articles__filter_medias):
         articles_enhanced_df.loc[df_length] = scraped_row
 
     # Write df to duckdb
-    connection = duckdb.connect(database=social_data_playground_db)
+    connection = duckdb.connect(database=freedom_convoy_playground_db)
     connection.execute("create schema if not exists enhanced_articles")
 
     # Check if the table exists
@@ -172,7 +172,7 @@ def article_llm_enhancements(context, article_scraped_data):
         # LLM chain to get assess relevancy of the article
         relevancy_template = """Given this overview of the Canada Convoy Protest: 
         'A series of protests and blockades in Canada against COVID-19 vaccine mandates and restrictions, called the Freedom Convoy (French: Convoi de la liberté) by organizers, began in early 2022. The initial convoy movement was created to protest vaccine mandates for crossing the United States border, but later evolved into a protest about COVID-19 mandates in general. Beginning January 22, hundreds of vehicles formed convoys from several points and traversed Canadian provinces before converging on Ottawa on January 29, 2022, with a rally at Parliament Hill. The convoys were joined by thousands of pedestrian protesters. Several offshoot protests blockaded provincial capitals and border crossings with the United States.'
-        Can you tell me if the following article talks about those protests, either the event itself, the actors, the aftermaths, etc. Answer stricly by either 'True' or 'False'.
+        Can you tell me if the following article talks about those protests, either the event itself, the actors, the aftermaths, etc. Answer strictly by either 'True' or 'False'.
         #####
         Article summary: {summary}
         """
@@ -203,7 +203,7 @@ def article_llm_enhancements(context, article_scraped_data):
         time.sleep(5)
 
     # Write df to duckdb
-    connection = duckdb.connect(database=social_data_playground_db)
+    connection = duckdb.connect(database=freedom_convoy_playground_db)
     connection.execute("create schema if not exists enhanced_articles")
 
     # Check if the table exists

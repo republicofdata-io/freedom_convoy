@@ -1,8 +1,8 @@
-name: 'social_data_playground_stage_sources'
+name: 'freedom_convoy_playground_stage_sources'
 version: '0.1.0'
 config-version: 2
 
-profile: 'social_data_playground_stage_sources'
+profile: 'freedom_convoy_playground_stage_sources'
 
 model-paths: ["models"]
 macro-paths: ["macros"]
@@ -12,5 +12,5 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  social_data_playground_stage_sources:
+  freedom_convoy_playground_stage_sources:
     +materialized: table

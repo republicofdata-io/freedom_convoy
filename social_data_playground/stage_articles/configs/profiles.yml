@@ -1,7 +1,0 @@
-social_data_playground_stage_articles:
-  target: dev
-  outputs:
-    dev:
-      type: duckdb
-      path: '../social_data_playground.db'
-      schema: stage_articles
