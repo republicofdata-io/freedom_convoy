@@ -11,7 +11,7 @@ import io
 import os
 
 
-freedom_convoy_playground_db = file_relative_path(__file__, "./../freedom_convoy_playground.db")
+freedom_convoy_db = file_relative_path(__file__, "./../freedom_convoy.db")
 
 
 @asset(
@@ -21,14 +21,14 @@ freedom_convoy_playground_db = file_relative_path(__file__, "./../freedom_convoy
 )
 def gdelt_articles(s3: S3Resource):
     # Download the file into a BytesIO object
-    obj = s3.get_client().get_object(Bucket='freedom-convoy-playground', Key='sources/gdelt_articles.csv')
+    obj = s3.get_client().get_object(Bucket='freedom-convoy', Key='sources/gdelt_articles.csv')
     file_content = io.BytesIO(obj['Body'].read())
     
     # Read the content into a DataFrame
     gdelt_articles_df = pd.read_csv(file_content)
 
     # Write df to duckdb
-    connection = duckdb.connect(database=freedom_convoy_playground_db)
+    connection = duckdb.connect(database=freedom_convoy_db)
     connection.execute("create schema if not exists s3_sources")
     connection.execute(
         "create or replace table s3_sources.gdelt_articles as select * from gdelt_articles_df"
@@ -50,14 +50,14 @@ def gdelt_articles(s3: S3Resource):
 )
 def media_sources(s3: S3Resource):
     # Download the file into a BytesIO object
-    obj = s3.get_client().get_object(Bucket='freedom-convoy-playground', Key='sources/media_sources.csv')
+    obj = s3.get_client().get_object(Bucket='freedom-convoy', Key='sources/media_sources.csv')
     file_content = io.BytesIO(obj['Body'].read())
     
     # Read the content into a DataFrame
     media_sources_df = pd.read_csv(file_content)
 
     # Write df to duckdb
-    connection = duckdb.connect(database=freedom_convoy_playground_db)
+    connection = duckdb.connect(database=freedom_convoy_db)
     connection.execute("create schema if not exists s3_sources")
     connection.execute(
         "create or replace table s3_sources.media_sources as select * from media_sources_df"
