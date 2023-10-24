@@ -14,3 +14,4 @@ logs
 __pycache__
 .venv
 freedom_convoy.db
+freedom_convoy.db.wal
