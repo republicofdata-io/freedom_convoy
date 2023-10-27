@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "freedom_convoy_playground"
+name = "freedom_convoy"
 version = "0.1.0"
 description = ""
 authors = ["Olivier Dupuis <odupuis@lantrns.co>"]
@@ -7,19 +7,18 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-dbt-core = "^1.6.1"
-dbt-duckdb = "^1.6.0"
-dagster = "^1.4.10"
-dagster-dbt = "^0.20.10"
-dagster-webserver = "^1.4.10"
+dbt-core = "^1.6.6"
+dbt-duckdb = "^1.6.1"
+dagster = "^1.5.4"
+dagster-dbt = "^0.21.4"
+dagster-webserver = "^1.5.4"
 bs4 = "^0.0.1"
 pandas = "2.0.3"
-dagster-duckdb = "^0.20.10"
-dagster-duckdb-pandas = "^0.20.10"
-dagster-aws = "^0.20.10"
-pyarrow = "^13.0.0"
-langchain = "0.0.281"
-openai = "0.28.0"
+dagster-duckdb = "^0.21.4"
+dagster-duckdb-pandas = "^0.21.4"
+dagster-aws = "^0.21.4"
+langchain = "0.0.321"
+openai = "0.28.1"
 
 
 [build-system]

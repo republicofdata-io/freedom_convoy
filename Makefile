@@ -1,4 +1,4 @@
 .PHONY: docker
 
 dagster:
-	dagster-webserver --module-name freedom_convoy_playground
+	dagster-webserver --module-name freedom_convoy

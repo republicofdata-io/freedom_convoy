@@ -1,0 +1,7 @@
+freedom_convoy_stage_sources:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../freedom_convoy.db'
+      schema: stage_sources

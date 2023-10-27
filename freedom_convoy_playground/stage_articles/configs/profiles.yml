@@ -1,7 +1,0 @@
-freedom_convoy_playground_stage_articles:
-  target: dev
-  outputs:
-    dev:
-      type: duckdb
-      path: '../freedom_convoy_playground.db'
-      schema: stage_articles
