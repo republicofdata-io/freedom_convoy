@@ -1,5 +1,5 @@
 sources:
-  - name: s3_sources
+  - name: social_signals
     tables:
       - name: gdelt_articles
       - name: media_sources

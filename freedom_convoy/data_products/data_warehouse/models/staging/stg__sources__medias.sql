@@ -11,7 +11,7 @@ with base as (
         "Traffic" as traffic,
         "Popularity Estimate" as popularity_estimate
 
-    from {{ source('s3_sources', 'media_sources') }}
+    from {{ source('social_signals', 'media_sources') }}
 
 )
 

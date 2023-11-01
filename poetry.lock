@@ -678,6 +678,25 @@ files = [
 ]
 
 [[package]]
+name = "dagster-snowflake"
+version = "0.21.5"
+description = "Package for Snowflake Dagster framework components."
+optional = false
+python-versions = "*"
+files = [
+    {file = "dagster-snowflake-0.21.5.tar.gz", hash = "sha256:d4ffb052079fcdcde75c12e228af41846801f44af0668abcb601cfe6e24bde08"},
+    {file = "dagster_snowflake-0.21.5-py3-none-any.whl", hash = "sha256:78ba0220d5484bbd964cc563a8e62bcd3696918e31faa35d0d5731ea9823d8c8"},
+]
+
+[package.dependencies]
+dagster = "1.5.5"
+snowflake-connector-python = ">=2.1.0"
+
+[package.extras]
+pandas = ["pandas", "snowflake-connector-python[pandas] (>=2.1.0)"]
+snowflake-sqlalchemy = ["snowflake-sqlalchemy", "sqlalchemy (!=1.4.42)"]
+
+[[package]]
 name = "dagster-webserver"
 version = "1.5.5"
 description = "Web UI for dagster."
@@ -3560,4 +3579,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "b8aa1c95fdafa85f4934b292da23c99e60c94f0671dbd7f1ec697bd9ec928143"
+content-hash = "f236009f981f0a23d13962ee37f935d78b64f55aaf5a9729f8c5be5dca3e4a6d"

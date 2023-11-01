@@ -1,3 +1,4 @@
+from dagster import config_from_pkg_resources
 from dagster_snowflake import snowflake_resource
 from freedom_convoy.utils.resources import web_scraper_resource
 
@@ -5,7 +6,7 @@ from freedom_convoy.utils.resources import web_scraper_resource
 # Configuration files
 snowflake_configs = config_from_pkg_resources(
     pkg_resource_defs=[
-        ('discursus_data_platform.utils.configs', 'snowflake_configs.yaml')
+        ('freedom_convoy.utils.configs', 'snowflake_configs.yaml')
     ],
 )
 # Initiate resources
