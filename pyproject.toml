@@ -14,9 +14,10 @@ dagster-dbt = "^0.21.4"
 dagster-snowflake = "^0.21.4"
 dagster-webserver = "^1.5.4"
 bs4 = "^0.0.1"
-pandas = "2.0.3"
+pandas = "^2.0.3"
 langchain = "0.0.321"
 openai = "0.28.1"
+snowflake-connector-python = {extras = ["pandas"], version = "^3.3.1"}
 
 
 [build-system]
