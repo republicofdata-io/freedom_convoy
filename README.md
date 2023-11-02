@@ -8,12 +8,20 @@ Unveiling the narratives of the Freedom Convoy protest movement through data, th
 3. Run poetry install to install all necessary dependencies.
 
 ## Usage
-1. Configure your AWS S3, dbt, and DuckDB settings as outlined in the __init__.py file.
+1. Have a `.env` file and define the following environment variables:
+```
+export SNOWFLAKE_ACCOUNT=dz02451.us-east-1
+export SNOWFLAKE_USER=[olivier]
+export SNOWFLAKE_PASSWORD='[PASSWORD]'
+export SNOWFLAKE_ROLE=DEV_ROLE
+export SNOWFLAKE_WAREHOUSE=FREEDOM_CONVOY_DEV_WAREHOUSE
+export SNOWFLAKE_DATABASE=FREEDOM_CONVOY
+export SNOWFLAKE_SCHEMA=[OLIVIER]_DEV
+```
 2. Run the Dagster pipelines to load, transform, and enhance the data.
-3. Explore the data in DuckDB to unravel the events and narratives of the Freedom Convoy protest movement.
+3. Explore the data in Snowflake
 
 ## Technologies Used
 - Dagster for data orchestration.
 - dbt for data transformation.
-- DuckDB for data management.
-- AWS S3 for storage and IO management.
+- Snowflake for data management.

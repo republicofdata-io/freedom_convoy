@@ -1,0 +1,26 @@
+name: 'freedom_convoy_data_warehouse'
+version: '0.1.0'
+config-version: 2
+
+profile: 'freedom_convoy_data_warehouse'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  freedom_convoy_data_warehouse:
+    +materialized: table
+    config:
+      meta:
+        dagster:
+          group: data_warehouse
+    staging:
+      +materialized: table
+      +schema: staging
+    integration:
+      +materialized: table
+      +schema: integration

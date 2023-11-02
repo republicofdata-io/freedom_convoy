@@ -1,0 +1,13 @@
+freedom_convoy_data_warehouse:
+  target: dev
+  outputs:
+    dev:
+      type:      snowflake
+      threads:   1
+      account:   "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user:      "{{ env_var('SNOWFLAKE_USER') }}"
+      password:  "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role:      "{{ env_var('SNOWFLAKE_ROLE') }}"
+      database:  "{{ env_var('SNOWFLAKE_DATABASE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+      schema:    "{{ env_var('SNOWFLAKE_SCHEMA') }}"

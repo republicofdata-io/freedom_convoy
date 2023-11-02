@@ -1,0 +1,14 @@
+sources:
+  - name: social_signals
+    database: social_signals
+    schema: gdelt
+    tables:
+      - name: gdelt_articles
+        identifier: gdelt_gkg_sample
+        meta:
+          dagster:
+            asset_key: ["social_signals", "gdelt_articles"]
+      - name: media_sources
+        meta:
+          dagster:
+            asset_key: ["social_signals", "media_sources"]
