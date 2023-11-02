@@ -1,15 +1,15 @@
 with base as (
 
     select
-        "News Source" as news_source,
+        news_source,
         domain,
-        "Country" as country,
-        "Media Type" as media_type,
-        "Bias" as bias,
-        "Credibility" as credibility,
-        "Reporting" as reporting,
-        "Traffic" as traffic,
-        "Popularity Estimate" as popularity_estimate
+        country,
+        media_type,
+        bias,
+        credibility,
+        reporting,
+        traffic,
+        popularity_estimate
 
     from {{ source('social_signals', 'media_sources') }}
 

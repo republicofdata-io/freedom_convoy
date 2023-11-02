@@ -16,7 +16,7 @@ my_assets = with_resources(
     load_assets_from_dbt_project(
         project_dir = social_signals_project_dir, 
         profiles_dir = social_signals_profile_dir, 
-        key_prefix = ["social_signals"],
+        key_prefix = ["data_warehouse"],
         use_build_command = False,
     ),
     resource_defs = {

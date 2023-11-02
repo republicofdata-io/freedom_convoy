@@ -14,3 +14,13 @@ clean-targets:
 models:
   freedom_convoy_data_warehouse:
     +materialized: table
+    config:
+      meta:
+        dagster:
+          group: data_warehouse
+    staging:
+      +materialized: table
+      +schema: staging
+    integration:
+      +materialized: table
+      +schema: integration
